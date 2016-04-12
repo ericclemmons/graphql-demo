@@ -12,8 +12,14 @@ rules:
   # express.Router()
   "new-cap": [2, { newIsCap: true, properties: false }]
 
+  # Every express server starts with it
+  "no-console": 0
+
   # Normalizing args shouldn't require a secondary variable
   "no-param-reassign": 0
+
+  # ...args is common, get over it
+  "no-shadow": 0
 
   # Documenting function signatures is useful
   "no-unused-vars": [2, { vars: local, args: none }]

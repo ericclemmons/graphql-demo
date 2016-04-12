@@ -4,9 +4,9 @@ export function up(knex, Promise) {
     .all([
       knex.schema.dropTableIfExists("comment"),
       knex.schema.dropTableIfExists("post"),
-      knex.schema.dropTableIfExists("user"),
+      knex.schema.dropTableIfExists("author"),
     ])
-    .then(() => knex.schema.createTable("user", function createUser(table) {
+    .then(() => knex.schema.createTable("author", function createUser(table) {
       table.increments("id").primary();
       table.string("name");
       table.string("email");
@@ -21,7 +21,7 @@ export function up(knex, Promise) {
     }))
     .then(() => knex.schema.createTable("post", function createPost(table) {
       table.increments("id").primary();
-      table.integer("user_id").unsigned().references("id").inTable("user");
+      table.integer("author_id").unsigned().references("id").inTable("author");
       table.string("title");
       table.string("slug");
       table.string("body");
@@ -36,6 +36,6 @@ export function up(knex, Promise) {
 export function down(knex, Promise) {
   return knex.schema.dropTable("post")
     .then(() => knex.schema.dropTable("comment"))
-    .then(() => knex.schema.dropTable("user"))
+    .then(() => knex.schema.dropTable("author"))
   ;
 }

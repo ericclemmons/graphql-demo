@@ -32,6 +32,8 @@ Based on my experience, these are all you need:
 0. https://github.com/matthewmueller/graph.ql
   > Faster and simpler technique for creating and querying GraphQL schemas.
 
+0. https://github.com/graphql/graphql-js/
+  > The `__tests__` contain several "Star Wars"-themed types
 
 - - -
 
