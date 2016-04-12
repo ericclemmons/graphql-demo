@@ -35,6 +35,9 @@ Based on my experience, these are all you need:
 0. https://github.com/graphql/graphql-js/
   > The `__tests__` contain several "Star Wars"-themed types
 
+0. https://medium.com/@HurricaneJames/graphql-mutations-fb3ad5ae73c4
+  > Several good examples of mutations.
+
 - - -
 
 

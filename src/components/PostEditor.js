@@ -82,6 +82,10 @@ export default class PostEditor extends React.Component {
     fetch("/api", options)
       .then((response) => response.json())
       .then((response) => {
+        if (response.errors) {
+          throw new Error(response.errors[0].message);
+        }
+
         const { slug } = response.data.updatePost;
 
         browserHistory.push(`/posts/${slug}`);
@@ -108,7 +112,7 @@ export default class PostEditor extends React.Component {
     return (
       <div class="section">
         <div class="container">
-          <Notification {...error} />
+          <Notification error={error} />
 
           <div class="card is-fullwidth">
             <header class="card-header">

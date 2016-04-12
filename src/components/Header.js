@@ -29,6 +29,12 @@ export default class Header extends React.Component {
                     <span>GitHub</span>
                   </a>
                 </span>
+
+                <span class="header-item">
+                  <Link class="button is-secondary" to={`/posts/new`}>
+                    <i class="fa fa-plus" />&nbsp;New Post
+                  </Link>
+                </span>
               </div>
             </div>
           </header>

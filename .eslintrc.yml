@@ -6,6 +6,8 @@ rules:
   # No "best" practice
   "arrow-body-style": 0
 
+  "array-bracket-spacing": [2, "always"]
+
   # There's no "best" value
   "max-len": 0
 

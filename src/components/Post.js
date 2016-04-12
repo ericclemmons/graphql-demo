@@ -1,6 +1,6 @@
 import marked from "marked";
 import React from "react";
-import { Link } from "react-router";
+import { browserHistory, Link } from "react-router";
 
 import Notification from "./Notification";
 
@@ -43,16 +43,63 @@ export default class Post extends React.Component {
 
     fetch("/api", options)
       .then((response) => response.json())
-      .then((response) => this.setState({
-        error: null,
-        post: response.data.post,
-      }))
+      .then((response) => {
+        if (response.errors) {
+          throw new Error(response.errors[0].message);
+        }
+
+        this.setState({
+          error: null,
+          post: response.data.post,
+        });
+      })
       .catch((error) => this.setState({ error }))
     ;
   }
 
+  handleDelete = (event) => {
+    const query = `
+      mutation ($slug: String!) {
+        deletePost(slug: $slug)
+      }
+    `;
+
+    const { slug } = this.state.post;
+    const variables = { slug };
+
+    const options = {
+      method: "POST",
+      body: JSON.stringify({ query, variables }),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    fetch("/api", options)
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.errors) {
+          throw new Error(response.errors[0].message);
+        }
+
+        browserHistory.push("/");
+      })
+      .catch((error) => this.setState({ error }))
+    ;
+
+    event.preventDefault();
+  }
+
   render() {
     const { error, post } = this.state;
+
+    if (error) {
+      return (
+        <section class="section">
+          <div class="container">
+            <Notification error={error} />
+          </div>
+        </section>
+      );
+    }
 
     if (!post) {
       return (
@@ -66,8 +113,6 @@ export default class Post extends React.Component {
 
     return (
       <section class="section">
-        <Notification {...error} />
-
         <div class="container">
           <Link class="button is-pulled-right" to={`/posts/${post.slug}/edit`}>
             <i class="fa fa-edit" />&nbsp;Edit
@@ -83,6 +128,12 @@ export default class Post extends React.Component {
           </div>
 
           <div class="content" dangerouslySetInnerHTML={{ __html: marked(post.body) }} />
+
+          <hr />
+
+          <a class="button is-danger is-pulled-right" onClick={this.handleDelete}>
+            <i class="fa fa-times" />&nbsp;Delete
+          </a>
         </div>
       </section>
     );

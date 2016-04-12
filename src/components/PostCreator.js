@@ -24,7 +24,6 @@ export default class PostCreator extends React.Component {
     const query = `
       mutation (
         $title: String!
-        $slug: String!
         $body: String!
       ) {
         createPost(
@@ -47,7 +46,11 @@ export default class PostCreator extends React.Component {
     fetch("/api", options)
       .then((response) => response.json())
       .then((response) => {
-        const { slug } = response.data.updatePost;
+        if (response.errors) {
+          throw new Error(response.errors[0].message);
+        }
+
+        const { slug } = response.data.createPost;
 
         browserHistory.push(`/posts/${slug}`);
       })
@@ -67,7 +70,7 @@ export default class PostCreator extends React.Component {
             <h1 class="title">New Post</h1>
           </div>
 
-          <Notification {...error} />
+          <Notification error={error} />
 
           <div class="card is-fullwidth">
             <header class="card-header">

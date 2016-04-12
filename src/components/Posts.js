@@ -43,14 +43,20 @@ export default class Posts extends React.Component {
   render() {
     const { error, posts } = this.state;
 
+    if (!posts.length) {
+      return (
+        <div class="section">
+          <div class="container">
+            <i class="fa fa-cog fa-spin fa-3x fa-fw" />
+          </div>
+        </div>
+      );
+    }
+
     return (
       <section class="section">
         <div class="container">
           <Notification {...error} />
-
-          <Link class="button is-pulled-right" to={`/posts/new`}>
-            <i class="fa fa-plus" />&nbsp;New
-          </Link>
 
           {posts.map((post) => (
             <section class="section" key={post.slug}>

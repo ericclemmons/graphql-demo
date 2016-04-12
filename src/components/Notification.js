@@ -2,9 +2,9 @@ import React from "react";
 
 export default class Notification extends React.Component {
   render() {
-    const { message, type = "danger" } = this.props;
+    const { error, type = "danger" } = this.props;
 
-    if (!message) {
+    if (!error) {
       return null;
     }
 
@@ -12,7 +12,7 @@ export default class Notification extends React.Component {
       <div class="section">
         <div class="container">
           <div class={`notification is-${type}`}>
-            {message}
+            {error.message}
           </div>
         </div>
       </div>
