@@ -93,8 +93,29 @@ how to get started & refine your GraphQL implementation.
 ```shell
 $ nvm use
 $ npm install
-$ npm run 1
+$ npm start
 ```
+
+## Learnings
+
+- Setting up Express + GraphQL
+- GraphiQL
+- Passing `rootValue` (or `context`)
+- How client-side queries look
+  - Properties
+  - Variables
+  - Fragments
+- Query schema
+  - Types
+  - Args
+  - Resolve
+- Mutation schema
+  - Types
+  - Args
+  - Resolve
+- Errors
+- DataLoader
+
 
 
 [0]: http://www.meetup.com/NodejsHouston/

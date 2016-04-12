@@ -45,11 +45,15 @@ export default class Posts extends React.Component {
 
     return (
       <section class="section">
-        <Notification {...error} />
+        <div class="container">
+          <Notification {...error} />
 
-        {posts.map((post) => (
-          <section class="section" key={post.slug}>
-            <div class="container">
+          <Link class="button is-pulled-right" to={`/posts/new`}>
+            <i class="fa fa-plus" />&nbsp;New
+          </Link>
+
+          {posts.map((post) => (
+            <section class="section" key={post.slug}>
               <div class="heading">
                 <h1 class="title">
                   <Link to={`/posts/${post.slug}`}>
@@ -61,9 +65,9 @@ export default class Posts extends React.Component {
                   {post.lastUpdated}
                 </h2>
               </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          ))}
+        </div>
       </section>
     );
   }

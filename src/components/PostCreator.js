@@ -4,56 +4,22 @@ import { browserHistory } from "react-router";
 import Editor from "./Editor";
 import Notification from "./Notification";
 
-export default class PostEditor extends React.Component {
+export default class PostCreator extends React.Component {
   constructor() {
     super();
 
     this.state = {
       error: null,
-      post: null,
     };
   }
 
-  componentWillMount() {
-    const query = `
-      query ($slug: String!) {
-        post(slug: $slug) {
-          title
-          slug
-          body
-        }
-      }
-    `;
-
-    const { slug } = this.props.params;
-    const variables = { slug };
-
-    const options = {
-      method: "POST",
-      body: JSON.stringify({ query, variables }),
-      headers: { "Content-Type": "application/json" },
-    };
-
-    fetch("/api", options)
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.errors) {
-          throw new Error(response.errors[0].message);
-        }
-
-        this.setState({
-          error: null,
-          post: response.data.post,
-        });
-      })
-      .catch((error) => this.setState({ error }))
-    ;
+  componentDidMount() {
+    this.refs.title.focus();
   }
 
   handleSave = (event) => {
     const title = this.refs.title.value;
     const body = this.refs.editor.getValue();
-    const { slug } = this.props.params;
 
     const query = `
       mutation (
@@ -61,9 +27,8 @@ export default class PostEditor extends React.Component {
         $slug: String!
         $body: String!
       ) {
-        updatePost(
+        createPost(
           title: $title
-          slug: $slug
           body: $body
         ) {
           slug
@@ -71,7 +36,7 @@ export default class PostEditor extends React.Component {
       }
     `;
 
-    const variables = { title, slug, body };
+    const variables = { title, body };
 
     const options = {
       method: "POST",
@@ -93,21 +58,15 @@ export default class PostEditor extends React.Component {
   }
 
   render() {
-    const { error, post } = this.state;
-
-    if (!post) {
-      return (
-        <div class="section">
-          <div class="container">
-            <i class="fa fa-cog fa-spin fa-3x fa-fw" />
-          </div>
-        </div>
-      );
-    }
+    const { error } = this.state;
 
     return (
       <div class="section">
         <div class="container">
+          <div class="heading">
+            <h1 class="title">New Post</h1>
+          </div>
+
           <Notification {...error} />
 
           <div class="card is-fullwidth">
@@ -116,7 +75,6 @@ export default class PostEditor extends React.Component {
                 <p class="control is-grouped">
                   <input
                     class="input"
-                    defaultValue={post.title}
                     placeholder="Title"
                     ref="title"
                     type="text"
@@ -126,13 +84,13 @@ export default class PostEditor extends React.Component {
                     class="button is-primary"
                     onClick={this.handleSave}
                   >
-                    Save
+                    Create
                   </a>
                 </p>
               </div>
             </header>
             <div class="card-content">
-              <Editor ref="editor" value={post.body} />
+              <Editor ref="editor" />
             </div>
           </div>
         </div>
