@@ -1,5 +1,5 @@
 import {
-  GraphQLError,
+  // GraphQLError,
   GraphQLID,
   GraphQLList,
   GraphQLNonNull,
@@ -24,7 +24,7 @@ export default new GraphQLObjectType({
         },
 
         resolve(parent, args, context) {
-          const { db } = context.rootValue;
+          const { db } = context;
           const { id } = args;
 
           return db("author")
@@ -38,7 +38,7 @@ export default new GraphQLObjectType({
         type: new GraphQLList(AuthorType),
 
         resolve(parent, args, context) {
-          const { db } = context.rootValue;
+          const { db } = context;
 
           return db("author");
         },
@@ -52,39 +52,25 @@ export default new GraphQLObjectType({
         },
 
         resolve(parent, args, context) {
-          const { db } = context.rootValue;
+          const { post } = context.loaders;
           const { slug } = args;
 
-          return db("post")
-            .first()
-            .where("slug", slug)
-            .then((post) => {
-              if (!post) {
-                throw new GraphQLError(`Post with slug "${slug}" not found`);
-              }
-
-              return post;
-            })
-          ;
+          return post.load(slug);
         },
       },
 
       posts: {
         type: new GraphQLList(PostType),
 
-        args: {
-          ids: { type: new GraphQLList(GraphQLID) },
-        },
-
         resolve(parent, args, context) {
-          const { ids } = args;
-          const { db } = context.rootValue;
+          const { db } = context;
+          const { post } = context.loaders;
 
-          if (ids) {
-            return db("post").whereIn("id", ids);
-          }
-
-          return db("post");
+          return db("post")
+            .select("slug")
+            .map(({ slug }) => slug)
+            .then((slugs) => post.loadMany(slugs))
+          ;
         },
       },
     };

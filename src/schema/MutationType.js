@@ -24,7 +24,7 @@ export default new GraphQLObjectType({
         },
 
         resolve(parent, args, context) {
-          const { db } = context.rootValue;
+          const { db } = context;
 
           const { title, body } = args;
 
@@ -49,12 +49,14 @@ export default new GraphQLObjectType({
         },
 
         resolve(parent, args, context) {
-          const { db } = context.rootValue;
+          const { db } = context;
+          const { post } = context.loader;
           const { slug } = args;
 
           return db("post")
             .where("slug", slug)
             .del()
+            .then(() => post.clear(slug))
           ;
         },
       },
@@ -69,20 +71,22 @@ export default new GraphQLObjectType({
         },
 
         resolve(parent, args, context) {
-          const { db } = context.rootValue;
-          const { title, body } = args;
+          const { db } = context;
+          const { post } = context.loaders;
+          const { title, slug, body } = args;
 
           const newSlug = kebabCase(title);
 
           return db("post")
-            .where("slug", args.slug)
+            .where("slug", slug)
             .update({
               title,
               slug: newSlug,
               body,
               updated_at: new Date(),
             })
-            .then(() => db("post").first().where("slug", newSlug))
+            .then(() => post.clear(slug))
+            .then(() => post.load(newSlug))
           ;
         },
       },

@@ -18,7 +18,7 @@ export default new GraphQLObjectType({
       author: {
         type: new GraphQLNonNull(AuthorType),
         resolve(parent, args, context) {
-          const { db } = context.rootValue;
+          const { db } = context;
 
           return db("author").first().where("id", parent.author_id);
         },
