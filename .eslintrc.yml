@@ -1,0 +1,39 @@
+extends: airbnb
+parser: babel-eslint
+plugins:
+  - react
+rules:
+  # No "best" practice
+  "arrow-body-style": 0
+
+  # There's no "best" value
+  "max-len": 0
+
+  # express.Router()
+  "new-cap": [2, { newIsCap: true, properties: false }]
+
+  # Normalizing args shouldn't require a secondary variable
+  "no-param-reassign": 0
+
+  # Documenting function signatures is useful
+  "no-unused-vars": [2, { vars: local, args: none }]
+
+  # No "best practice"
+  "prefer-arrow-callback": 0
+
+  # 'I can't help but make this mistake!'
+  "quotes": [0, double, avoid-escape]
+
+  # https://github.com/insin/babel-plugin-react-html-attrs
+  "react/no-unknown-property": 0
+
+  # I know what I'm doing
+  "react/no-deprecated": 0
+
+  # HMR works best with React.Component
+  "react/prefer-stateless-function": 0
+
+  # Warn, but don't break build
+  "react/prop-types": 0
+
+  "react/sort-comp": 0

@@ -1,0 +1,6 @@
+{
+  "plugins": [
+    "react-html-attrs"
+  ],
+  "presets": ["es2015", "react", "react-hmre", "stage-1"]
+}
