@@ -1,0 +1,12 @@
+{
+  user(id: 123) {
+    id,
+    name,
+    emal,
+    avatar(size: 50) {
+      uri,
+      width,
+      height
+    }
+  }
+}

@@ -7,7 +7,8 @@
 ## Goals
 
 - Introduce GraphQL's purpose & benefits.
-- Show several iterations of building a GraphQL server.
+- Demo a functioning GraphQL application.
+- Illustrate how to optimize & clean the code.
 
 
 ## Resources

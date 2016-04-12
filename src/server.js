@@ -8,8 +8,8 @@ import files from "./middleware/files";
 import view from "./middleware/view";
 
 express()
-  .use(files)
   .use(webpack(module, config))
+  .use(files)
   .use(api)
   .use(view)
   .listen(3000, "localhost", (err) => {

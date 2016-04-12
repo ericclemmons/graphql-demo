@@ -27,7 +27,10 @@ export default new GraphQLObjectType({
           const { db } = context.rootValue;
           const { id } = args;
 
-          return db("author").first().where("id", id);
+          return db("author")
+            .first()
+            .where("id", id)
+          ;
         },
       },
 

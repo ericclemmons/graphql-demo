@@ -70,6 +70,12 @@ export default class Header extends React.Component {
                     <i class="fa fa-code"></i> API
                   </a>
                 </li>
+
+                <li class={classNames({ "is-active": pathname === "/presentation" })}>
+                  <a href="/presentation" target="_blank">
+                    <i class="fa fa-desktop"></i> Presentation
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
