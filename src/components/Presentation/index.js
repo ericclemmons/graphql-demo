@@ -63,7 +63,6 @@ export default class Presentation extends React.Component {
             transition={[]}
           />
 
-
           <Slide>
             <Heading lineHeight={1.5}>
               Declarative
@@ -170,7 +169,7 @@ export default class Presentation extends React.Component {
             ranges={[
               { loc: [ 0, 1 ], title: "express-graphql" },
               { loc: [ 4, 5 ], note: "Import a schema" },
-              { loc: [ 15, 23 ], note: "Pass /api requests to GraphQL" },
+              { loc: [ 23, 31 ], note: "Pass /api requests to GraphQL" },
             ]}
             transition={[]}
           />
@@ -205,6 +204,12 @@ export default class Presentation extends React.Component {
             transition={[]}
           />
 
+          <Slide>
+            <Heading fit>
+              Querying an Author
+            </Heading>
+          </Slide>
+
           <Slide bgImage={require("./author.error.png")} align="center flex-end">
             <Heading textColor="black">
               Errors
@@ -229,6 +234,43 @@ export default class Presentation extends React.Component {
               Fragments
             </Heading>
           </Slide>
+
+          <Slide>
+            <Heading lineHeight={1.5}>
+              DataLoader
+            </Heading>
+            <BlockQuote>
+              Simple wrapper for fetching & caching queries.
+            </BlockQuote>
+          </Slide>
+
+          <CodeSlide
+            code={require("!raw!../../middleware/api.js")}
+            lang="js"
+            ranges={[
+              { loc: [ 15, 23 ], title: "api", note: "post loader" },
+            ]}
+            transition={[]}
+          />
+
+          <CodeSlide
+            code={require("!raw!../../schema/QueryType.js")}
+            lang="js"
+            ranges={[
+              { loc: [ 53, 59 ], title: "QueryType.js", note: "post { ... }" },
+              { loc: [ 64, 75 ], note: "posts { ... }" },
+            ]}
+            transition={[]}
+          />
+
+          <CodeSlide
+            code={require("!raw!../../schema/MutationType.js")}
+            lang="js"
+            ranges={[
+              { loc: [ 81, 92 ], note: "updatePost(...) { ... }" },
+            ]}
+            transition={[]}
+          />
 
           <Slide>
             <Heading fit>

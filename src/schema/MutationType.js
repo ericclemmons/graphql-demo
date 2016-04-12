@@ -25,18 +25,20 @@ export default new GraphQLObjectType({
 
         resolve(parent, args, context) {
           const { db } = context;
+          const { post } = context.loaders;
 
           const { title, body } = args;
+          const slug = kebabCase(title);
 
           return db("post")
             .insert({
               author_id: 1,
               title,
-              slug: kebabCase(title),
+              slug,
               body,
               created_at: new Date(),
             })
-            .then(([ id ]) => db("post").first().where("id", id))
+            .then(() => post.load(slug))
           ;
         },
       },
@@ -50,7 +52,7 @@ export default new GraphQLObjectType({
 
         resolve(parent, args, context) {
           const { db } = context;
-          const { post } = context.loader;
+          const { post } = context.loaders;
           const { slug } = args;
 
           return db("post")
