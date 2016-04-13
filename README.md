@@ -35,6 +35,10 @@ $ npm start
 
 Open <http://localhost:3000/>.
 
-[0]: http://www.meetup.com/NodejsHouston/
+### Special Thanks
 
+- @kenwheeler's [Spectacle](https://github.com/FormidableLabs/spectacle)
+- @thejameskyle's [spectacle-code-slide](https://github.com/thejameskyle/spectacle-code-slide)
+
+[0]: http://www.meetup.com/NodejsHouston/
 [1]: presentation.pdf
