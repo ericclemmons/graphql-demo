@@ -167,8 +167,8 @@ export default class Presentation extends React.Component {
             code={require("!raw!../../middleware/api.js")}
             lang="js"
             ranges={[
-              { loc: [ 0, 1 ], title: "express-graphql" },
-              { loc: [ 4, 5 ], note: "Import a schema" },
+              { loc: [ 1, 2 ], title: "express-graphql" },
+              { loc: [ 5, 6 ], note: "Import a schema" },
               { loc: [ 23, 31 ], note: "Pass /api requests to GraphQL" },
             ]}
             transition={[]}
