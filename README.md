@@ -37,8 +37,13 @@ Open <http://localhost:3000/>.
 
 ### Special Thanks
 
-- [@kenwheeler](https://github.com/kenwheeler)'s [Spectacle](https://github.com/FormidableLabs/spectacle)
-- [@thejameskyle](https://github.com/thejameskyle)'s [spectacle-code-slide](https://github.com/thejameskyle/spectacle-code-slide)
+- [Spectacle](https://github.com/FormidableLabs/spectacle)
+  by
+  [@kenwheeler](https://github.com/kenwheeler).
+- [spectacle-code-slide](https://github.com/thejameskyle/spectacle-code-slide)
+  by
+  [@thejameskyle](https://github.com/thejameskyle).
+
 
 [0]: http://www.meetup.com/NodejsHouston/
 [1]: presentation.pdf
